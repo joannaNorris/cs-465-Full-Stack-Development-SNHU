@@ -4,7 +4,9 @@
 	<ul id="sites">
 		{{#each trips}}
 		<li>
+			<a href="/api/trips/{{this.code}}">
 			<img src="{{image}}" alt="Img">
+			</a>
 
 			<h2>{{name}}</h2>
 
