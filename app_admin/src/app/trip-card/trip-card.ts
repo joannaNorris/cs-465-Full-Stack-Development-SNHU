@@ -1,9 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-trip-card',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './trip-card.html',
   styleUrl: './trip-card.css',
 })
-export class TripCard {}
+export class TripCard implements OnInit {
+  @Input('trip') trip: any;
+
+  constructor() {}
+
+  ngOnInit(): void {
+  }
+
+}

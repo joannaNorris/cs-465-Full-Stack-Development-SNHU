@@ -9,7 +9,9 @@
         <p class="card-subtitle mt-3 mb-3 text-muted">
 {{trip.length}} only {{trip.perPerson|currency:'USD':true}} per person
         </p>
-        <p class="card-text" [innerHTML]="trip.description">
+        <p class="card-text" [innerHTML]="trip.desc1">
+        </p>
+        <p class="card-text" [innerHTML]="trip.desc2">
         </p>
     </div>
 </div>
