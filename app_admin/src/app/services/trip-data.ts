@@ -12,7 +12,7 @@ export class TripData {
     constructor(private http: HttpClient) { }
 
     getTrips(): Observable<Trip[]> {
-        let url = '/api/trips';
+        let url = 'http://localhost:3000/api/trips';
         return this.http.get<Trip[]>(url);
     }
 

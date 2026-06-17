@@ -23,20 +23,21 @@ export class TripListing implements OnInit {
   }
 
   private getStuff(): void {
-  this.tripData.getTrips().subscribe({
-    next: (value: any) => {
-      this.trips = value;
-      if (value.length > 0) {
-        this.message = 'There are ' + value.length + ' trips available.';
-      } else {
-        this.message = 'No trips were retrieved from this database.';
+    this.tripData.getTrips().subscribe({
+      next: (value: any) => {
+        this.trips = value;
+        if (value.length > 0) {
+          this.message = 'There are ' + value.length + ' trips available.';
+        } else {
+          this.message = 'No trips were retrieved from this database.';
+        }
+        console.log(this.message);
+      },
+      error: (error: any) => {
+        console.error('Error: ' + error);
       }
-      console.log(this.message);
-    },
-    error: (error: any) => {
-      console.error('Error fetching trips:', error);
-    }
-  })}
+    })
+  }
 
   ngOnInit(): void {
     console.log('trip-listing ngOnInit');
