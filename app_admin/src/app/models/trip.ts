@@ -7,6 +7,5 @@ export interface Trip {
   resort: string;
   perPerson: number;
   image: string;
-  desc1: string;
-  desc2: string;
+  description: string;
 }

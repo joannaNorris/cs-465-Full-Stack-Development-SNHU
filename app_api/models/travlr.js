@@ -8,8 +8,8 @@ start: { type: Date, required: true },
 resort: { type: String, required: true },
 perPerson: { type: String, required: true },
 image: { type: String, required: true },
-desc1: { type: String, required: true },
-desc2: { type: String, required: true }
+description: { type: String, required: true }
 });
+
 const Trip = mongoose.model('Trip', tripSchema);
 module.exports = Trip;
