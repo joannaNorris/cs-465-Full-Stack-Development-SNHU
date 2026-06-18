@@ -2,9 +2,15 @@ const express = require('express');
 const router = express.Router();
 const tripsController = require('../controllers/trips');
 
-router.get('/trips', tripsController.tripsList);
+//define route for trips endpoint
+router
+    .route('/trips')
+    .get(tripsController.tripsList)
+    .post(tripsController.tripsAddTrip);
 
 //GET route for tripsFindByCode
-router.get('/trips/:code', tripsController.tripsFindByCode);
+router
+    .route('/trips/:code')
+    .get(tripsController.tripsFindByCode);
 
 module.exports = router;
