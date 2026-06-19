@@ -18,8 +18,9 @@ const tripsList = async (req, res) => {
 //GET trip by code
 const tripsFindByCode = async (req, res) => {
     try {
+        console.log('Fetching trip by code:', req.params.code);
         const trip = await Trip.findOne({'code': req.params.code}); //returns single record
-        
+        console.log('Found trip:', trip);
         if (!trip) {
             return res.status(404).json({
                 message: "Trip not found"

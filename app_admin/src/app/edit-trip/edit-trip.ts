@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule }
-from "@angular/forms";
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 import { TripData } from '../services/trip-data';
 import { Trip } from '../models/trip';
 
@@ -24,11 +23,14 @@ export class EditTrip implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private tripData: TripData
   ) {}
 
   ngOnInit(): void {
-    let code = localStorage.getItem('code');
+    const code = this.route.snapshot.paramMap.get('code');
+    //console.log('EditTrip::ngOnInit - code:', code);  
+
     if (!code) {
       alert("Something wrong, couldn't find where I stashed the code");
       this.router.navigate(['']);
@@ -49,7 +51,7 @@ export class EditTrip implements OnInit {
       description: ['', Validators.required],
     })
     
-    this.tripData.getTrip(code)
+    this.tripData.getTripByCode(code)
       .subscribe({
         next: (value: any) => {
           this.trip = value;
