@@ -16,11 +16,17 @@ export class TripData {
         return this.http.get<Trip[]>(this.url);
     }
 
-    getTripById(id: string): Observable<Trip> {
-        return this.http.get<Trip>(`${this.url}/${id}`);
-    }
 
     addTrip(formData: Trip): Observable<Trip> {
         return this.http.post<Trip>(this.url, formData);
     }
+
+    getTrip(code: string): Observable<Trip[]> {
+        //console.log('Inside TripData::getTrips');
+        return this.http.get<Trip[]>(this.url + '/' + code);
+    }
+
+    updateTrip(formData: Trip): Observable<Trip> {
+        return this.http.put<Trip>(this.url + '/' + formData.code, formData);
+    }   
 }
