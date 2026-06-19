@@ -5,7 +5,7 @@ export interface Trip {
   length: string;
   start: Date;
   resort: string;
-  perPerson: number;
+  perPerson: number | string;
   image: string;
   description: string;
 }

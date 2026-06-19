@@ -42,15 +42,22 @@ export class AddTrip implements OnInit {
       this.tripService.addTrip(this.addForm.value)
       .subscribe( {
         next: (data: any) => {
-          console.log(data);
-          this.router.navigate(['']);
+          console.log('Created trip:', data);
+
+          setTimeout(() => {
+            this.router.navigate(['']);
+          }, 100);
         },
         error: (error: any) => {
           console.log('Error: ' + error);
         }
       });
+
+      
     }
   }
+
+
 
   //get the form short name to access the form fields
   get f() { return this.addForm.controls; }

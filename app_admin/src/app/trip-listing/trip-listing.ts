@@ -7,8 +7,9 @@ import { TripData } from '../services/trip-data';
 import { Router } from '@angular/router';
 
 @Component({
-  providers: [TripData],
+  //providers: [TripData],
   selector: 'app-trip-listing',
+  standalone: true,
   imports: [CommonModule, TripCard],
   templateUrl: './trip-listing.html',
   styleUrl: './trip-listing.css',
@@ -16,13 +17,15 @@ import { Router } from '@angular/router';
 
 
 export class TripListing implements OnInit {
-  trips: Array<any> = trips;
+  // trips: Array<any> = trips;
+  //trips: Array<any> = [];
+  trips: Trip[] = [];
   message: string = '';
 
   constructor(
     private tripData: TripData, 
     private router: Router) {
-    console.log('trip-listing constructor');
+    console.log('tripData instance:', this.tripData);
   }
 
   public addTrip(): void {
@@ -31,9 +34,12 @@ export class TripListing implements OnInit {
 
   private getStuff(): void {
     this.tripData.getTrips().subscribe({
-      next: (value: any) => {
+      next: (value: Trip[]) => {
         console.log('API RESPONSE:', value);
-        this.trips = value;
+        console.log('tripData.getTrips exists:', this.tripData.getTrips );
+
+        this.trips = [...value];
+
         if (value.length > 0) {
           this.message = 'There are ' + value.length + ' trips available.';
         } else {
