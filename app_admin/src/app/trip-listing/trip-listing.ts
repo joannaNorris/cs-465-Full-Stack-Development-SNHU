@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trips } from '../data/trips';
 import { TripCard } from '../trip-card/trip-card';
 import { Trip } from '../models/trip';
 import { TripData } from '../services/trip-data';
 import { Router } from '@angular/router';
+
 
 @Component({
   //providers: [TripData],
@@ -24,8 +25,10 @@ export class TripListing implements OnInit {
 
   constructor(
     private tripData: TripData, 
-    private router: Router) {
-    console.log('tripData instance:', this.tripData);
+    private router: Router, 
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+    console.log('trip-listing constructor');
   }
 
   public addTrip(): void {
@@ -39,6 +42,8 @@ export class TripListing implements OnInit {
         console.log('tripData.getTrips exists:', this.tripData.getTrips );
 
         this.trips = [...value];
+
+        this.changeDetectorRef.detectChanges();
 
         if (value.length > 0) {
           this.message = 'There are ' + value.length + ' trips available.';
@@ -56,5 +61,9 @@ export class TripListing implements OnInit {
   ngOnInit(): void {
     console.log('trip-listing ngOnInit');
     this.getStuff();  
+  }
+
+  trackByCode(index: number, trip: any): string {
+    return trip.code;
   }
 }
