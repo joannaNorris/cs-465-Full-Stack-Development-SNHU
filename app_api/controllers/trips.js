@@ -65,36 +65,43 @@ const tripsAddTrip = async (req, res) => {
 // Regardless of outcome, response must include HTTP status code
 // and JSON message to the requesting client
 const tripsUpdateTrip = async(req, res) => {
+    try {
+        // Uncomment for debugging
+        console.log(req.params);
+        console.log(req.body);
 
-    // Uncomment for debugging
-    console.log(req.params);
-    console.log(req.body);
+        const q = await Trip
+            .findOneAndUpdate(
+                { code : req.params.code },
+                {
+                    code: req.body.code,
+                    name: req.body.name,
+                    length: req.body.length,
+                    start: req.body.start,
+                    resort: req.body.resort,
+                    perPerson: req.body.perPerson,
+                    image: req.body.image,
+                    description: req.body.description
+                },
+                { returnDocument: 'after' } //return the updated document
+            );
+          //  .exec();
 
-    const q = await Model
-        .findOneAndUpdate(
-            { 'code' : req.params.tripCode },
-            {
-                code: req.body.code,
-                name: req.body.name,
-                length: req.body.length,
-                start: req.body.start,
-                resort: req.body.resort,
-                perPerson: req.body.perPerson,
-                image: req.body.image,
-                description: req.body.description
+            if(!q) { // Database returned no data
+                return res
+                    .status(404).json({
+                        message: "Trip not updated"
+                    });
             }
-        )
-        .exec();
+            // Return resulting updated trip
+            return res.status(200).json(q);
 
-        if(!q) { // Database returned no data
-            return res
-                .status(400)
-                .json(err);
-        } else { // Return resulting updated trip
-            return res
-                .status(201)
-                .json(q);
-        }
+        } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+
+    }
 
         // Uncomment the following line to show results of operation
         // on the console
