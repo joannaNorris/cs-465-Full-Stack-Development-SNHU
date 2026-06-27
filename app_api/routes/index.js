@@ -11,13 +11,13 @@ router.route("/login").post(authController.login); //POST route for user login
 router
     .route('/trips')
     .get(tripsController.tripsList)
-    .post(tripsController.tripsAddTrip);
+    .post(authenticateJWT, tripsController.tripsAddTrip);
 
 //GET route for tripsFindByCode
 router
     .route('/trips/:code')
     .get(tripsController.tripsFindByCode)
-    .put(tripsController.tripsUpdateTrip);
+    .put(authenticateJWT, tripsController.tripsUpdateTrip);
 
     // Method to authenticate our JWT
 function authenticateJWT(req, res, next) {
