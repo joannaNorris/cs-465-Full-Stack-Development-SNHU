@@ -4,7 +4,7 @@ const tripsController = require('../controllers/trips');
 const authController = require('../controllers/authentication');
 
 router.route("/register").post(authController.register); //POST route for user registration
-//router.route("/login").post(authController.login); //POST route for user login
+router.route("/login").post(authController.login); //POST route for user login
 
 //define route for trips endpoint
 router
