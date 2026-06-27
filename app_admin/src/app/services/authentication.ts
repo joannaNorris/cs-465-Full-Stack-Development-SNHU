@@ -10,7 +10,7 @@ export class Authentication {
     // Setup our storage and service access
     constructor(
         @Inject(BROWSER_STORAGE) private storage: Storage,
-        private tripDataService: TripData
+        private tripData: TripData
     ) { }
 
     // Variable to handle Authentication Responses
@@ -71,7 +71,7 @@ export class Authentication {
     // Uncomment the two console.log messages for additional debugging
     // information.
     public login(user: User, passwd: string) : void {
-        this.tripDataService.login(user,passwd)
+        this.tripData.login(user,passwd)
             .subscribe({
                 next: (value: any) => {
                     if(value)
@@ -95,7 +95,7 @@ export class Authentication {
     // login method because the behavior of the API logs a new user in
     // immediately upon registration
     public register(user: User, passwd: string) : void {
-        this.tripDataService.register(user,passwd)
+        this.tripData.register(user,passwd)
             .subscribe({
                 next: (value: any) => {
                     if(value)
