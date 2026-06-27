@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 
 //Function to handle user registration
-exports.register = async (req, res) => {
+const register = async (req, res) => {
     if (!req.body.email || !req.body.name || !req.body.password) {
         return res
             .status(400)
