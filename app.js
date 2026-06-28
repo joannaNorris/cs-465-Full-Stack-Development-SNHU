@@ -55,7 +55,7 @@ app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
 app.use('/about', aboutRouter);
 app.use('/rooms', roomsRouter);
-//app.use('/meals', mealsRouter);
+app.use('/meals', mealsRouter);
 //app.use('/news', newsRouter);
 app.use('/contact', contactRouter);
 app.use('/api', apiRouter);
