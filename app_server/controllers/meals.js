@@ -1,6 +1,7 @@
 const meals = (req, res) => {
     res.render('meals', {
-        title: 'Meals'
+        title: 'Meals',
+        isMeals: true
     });
 }
 

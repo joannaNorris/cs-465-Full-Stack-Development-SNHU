@@ -1,6 +1,7 @@
 const news = (req, res) => {
     res.render('news', {
-        title: 'News'
+        title: 'News',
+        isNews: true
     });
 }
 

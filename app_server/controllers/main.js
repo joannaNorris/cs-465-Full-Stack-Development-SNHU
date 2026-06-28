@@ -1,8 +1,11 @@
 /* GET homepage */
 const index = (req, res) => {
   res.render('index', { 
-    title: 'Travlr Getaways' });
+    title: 'Travlr Getaways',
+    isHome: true
+  });
 };
+
 module.exports = {
  index                                           
 };    
