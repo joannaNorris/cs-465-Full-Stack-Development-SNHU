@@ -1,11 +1,13 @@
-import { Service } from '@angular/core';
 import { Inject, Injectable } from '@angular/core';
 import { BROWSER_STORAGE } from '../storage';
 import { User } from '../models/user';
 import { AuthResponse } from '../models/auth-response';
 import { TripData } from '../services/trip-data';
 
-@Service()
+@Injectable({
+    providedIn: 'root'
+})
+
 export class Authentication {
     // Setup our storage and service access
     constructor(
