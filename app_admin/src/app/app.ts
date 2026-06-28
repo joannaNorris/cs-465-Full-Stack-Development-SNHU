@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './navbar/navbar';
-//import { TripListing } from './trip-listing/trip-listing';
+
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,9 @@ import { Navbar } from './navbar/navbar';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
+
+
 export class App {
   protected readonly title = 'Travlr Getaways Admin!';
 }
