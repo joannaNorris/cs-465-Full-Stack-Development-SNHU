@@ -5,6 +5,7 @@ import { TripCard } from '../trip-card/trip-card';
 import { Trip } from '../models/trip';
 import { TripData } from '../services/trip-data';
 import { Router } from '@angular/router';
+import { Authentication } from '../services/authentication';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class TripListing implements OnInit {
   constructor(
     private tripData: TripData, 
     private router: Router, 
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private authentication: Authentication
   ) {
     console.log('trip-listing constructor');
   }
@@ -65,5 +67,9 @@ export class TripListing implements OnInit {
 
   trackByCode(index: number, trip: any): string {
     return trip.code;
+  }
+
+  public isLoggedIn(){
+    return this.authentication.isLoggedIn();
   }
 }
