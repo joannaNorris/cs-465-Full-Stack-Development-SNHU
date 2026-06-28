@@ -37,7 +37,7 @@ app.set('view options', { layout: 'layouts/layout' });
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize()); //initialize passport for authentication
@@ -49,11 +49,12 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   next();
 });
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
 app.use('/about', aboutRouter);
-//app.use('/rooms', roomsRouter);
+app.use('/rooms', roomsRouter);
 //app.use('/meals', mealsRouter);
 //app.use('/news', newsRouter);
 app.use('/contact', contactRouter);
