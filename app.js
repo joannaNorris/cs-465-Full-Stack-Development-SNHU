@@ -12,7 +12,17 @@ var roomsRouter = require('./app_server/routes/rooms');
 var mealsRouter = require('./app_server/routes/meals');
 var newsRouter = require('./app_server/routes/news');
 var contactRouter = require('./app_server/routes/contact');
+var apiRouter = require('./app_api/routes/index');
+
 var handlebars = require('hbs');
+
+var passport = require('passport');
+require('./app_api/config/passport'); //bring in the passport config file
+
+//bring in the database
+require('./app_api/models/db');
+
+require('dotenv').config(); //load environment variables from .env file
 
 var app = express();
 
@@ -27,18 +37,28 @@ app.set('view options', { layout: 'layouts/layout' });
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize()); //initialize passport for authentication
+
+//Enable CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
 app.use('/about', aboutRouter);
-//app.use('/rooms', roomsRouter);
-//app.use('/meals', mealsRouter);
-//app.use('/news', newsRouter);
-//app.use('/contact', contactRouter);
+app.use('/rooms', roomsRouter);
+app.use('/meals', mealsRouter);
+app.use('/news', newsRouter);
+app.use('/contact', contactRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,5 +75,15 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// Catch unauthorized error and create 401
+app.use((err, req, res, next) => {
+  if(err.name === 'UnauthorizedError') {
+    res
+    .status(401)
+    .json({"message": err.name + ": " + err.message});
+  }
+});
+
 
 module.exports = app;

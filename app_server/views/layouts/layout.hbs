@@ -6,8 +6,12 @@
     <link rel='stylesheet' href='/css/style.css' />
   </head>
   <body>
-    {{> header}}
-    {{{body}}}
-    {{> footer}}
+    <div id="background">
+      <div id="page">
+      {{> header}}
+      {{{body}}}
+      {{> footer}}
+      </div>
+    </div>
   </body>
 </html>
